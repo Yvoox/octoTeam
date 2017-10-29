@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<script>
+/* Set the width of the side navigation to 250px */
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+} 
+</script>
+
+<html lang="fr">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<link rel="stylesheet" href="./css/style.css" />
+<title>3D NOV</title>
+</head>
+
+
+
+
+
+
+
+<body>
+
+<header>
+
+<div class="navbar_custom">
+	<div id="mySidenav" class="sidenav">
+	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	  <a href="accueil.html">Accueil</a>
+	  <a href="#">Services</a>
+	  <a href="#">Clients</a>
+	  <a href="#">Contact</a>
+	</div>
+	<span onclick="openNav()"><img src="./img/navbar.png" width="5%" height="5%"/></span>
+	<span><img src="./img/logo.png" width="15%" height="15%"/></span>
+	<span onclick="openNav()"> DEFAULT ID AND NAME </span>
+
+</div>	
+
+
+</header>
+
+
+
+
+
+
+<div id="main">
+  <button class="button" onclick="window.location.href='start_imp.html'">Démarrer une impression</button>
+  </br>
+  <button class="button" onclick="window.location.href='control.html'">Contrôler mon imprimante</button>
+  </br>
+  <button class="button" onclick="window.location.href='config_imp.html'">Configurer mon imprimante</button>
+  <button class="button2">Utilitaires</button>
+  <button class="button3">Redémarrer</button>
+  
+  
+</div> 
+
+</body>
+
+
+
+
+</html> 
