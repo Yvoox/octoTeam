@@ -51,25 +51,20 @@ function closeNav() {
 
 
 
-<h2> Ou allons-nous récupérer vos fichiers ? </h2>
+	<h2> Veuillez chercher votre fichier </h2>
 <div id="main" style="text-align:center;">
+
 	
-	<div>
-	<button class="button_number"  onclick="window.location.href='search_file.php'">LOCAL</button>
+	<form enctype="multipart/form-data" action="./traitement/page_imp.php" method="post">
+		<input type="hidden" name="MAX_FILE_SIZE" value="30000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" />
+		<input name="temp_file" type="file" accept=".gcode,.STL,.txt" >
 
-  <button class="button_number" onclick="window.location.href='search_file.php'">SD</button>
-
-  <button class="button_number" onclick="window.location.href='search_file.php'">USB</button>
-  </div>
-  </br>
 	
 
-  
-  
 </div> 
-  <button class="button2">Utilitaires</button>
-  <button class="button3">Redémarrer</button>
-
+  <button class="button2" onclick="window.location.href='start_imp.html'">Retour</button>
+  <input type="submit" value="Valider" class="button_valid_file">
+	</form>
 </body>
 
 
