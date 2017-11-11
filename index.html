@@ -12,16 +12,32 @@ function closeNav() {
 } 
 </script>
 
+
 <html lang="fr">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
 <link rel="stylesheet" href="./css/style.css" />
+<script src="./js/function.js" type="text/javascript"></script>
 <title>3D NOV</title>
 </head>
 
 
+<script>
+window.setInterval(function(){
+var a = getConnectionState();
+setTimeout(function(){
+    
+	if(a==1){document.getElementById("connection_state").src='./img/connection_g.svg';}
+else{
+document.getElementById("connection_state").src='./img/connection_r.svg';
 
+}
+}, 2000);
+
+
+}, 5000);
+</script>
 
 
 
@@ -41,6 +57,7 @@ function closeNav() {
 	<span onclick="openNav()"><img src="./img/navbar.png" width="5%" height="5%"/></span>
 	<span><img src="./img/logo.png" width="15%" height="15%"/></span>
 	<span onclick="openNav()"> DEFAULT ID AND NAME </span>
+	<input type="image" class="img_align"  id="connection_state" src="./img/connection_r.svg" width="5%" height="5%" onclick="connection_portAuto()" value="clickme"/>
 
 </div>	
 
@@ -59,7 +76,7 @@ function closeNav() {
   </br>
   <button class="button" onclick="window.location.href='config_imp.html'">Configurer mon imprimante</button>
   <button class="button2">Utilitaires</button>
-  <button class="button3">Redémarrer</button>
+  <button class="button3" onclick="">Redémarrer</button>
   
   
 </div> 

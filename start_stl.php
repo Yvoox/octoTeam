@@ -21,6 +21,7 @@ function closeNav() {
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
 <link href="./css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css" />
+<script src="./js/function.js" type="text/javascript"></script>
 <title>3D NOV</title>
 </head>
 
@@ -62,15 +63,17 @@ function closeNav() {
 	<div class="row">
 		<div class="col-md-6">
 			<div class=" start_box"> 
-				<p>Nom du fichier : <?php echo $_SESSION['root']; ?></p>
+				<div style="text-align:center">
+				<p>Nom du fichier :</p><p id="filename"> <?php echo $_GET['namefile']; ?></p></div>
 				<p>Type de fichier : STL</p>
-				<p>Taille du fichier : <?php echo $_SESSION['size']; ?></p>
+				<p style="display:inline;">Taille du fichier :</p> <p style="display:inline;" id="size">#DEFAULT</p>
 				</br>
-				<p>Infos :</p>
-				<p>Temps d'impression estimé:</p>
-				<p>Filament (bobine 1):</p>
-				<p>Filament (bobine 2):</p>
-				<p>Filament (bobine 3):</p>
+				<p style="padding-left:1%;boder-bottom: dotted 1px white;font-size:1.5em;">Infos :</p>
+				<p style="display:inline;">Temps d'impression estimé :</p><p style="display:inline;" id="time"> #DEFAULT</p></br>
+				<p style="display:inline;">Dimensions (hauteur x largeur x profondeur) :</p><p style="display:inline;" id="height"> #DEFAULT</p><p style="display:inline;" id="width"> #DEFAULT</p><p style="display:inline;" id="depth"> #DEFAULT</p></br>
+				<p style="display:inline;">Filament (bobine 1) :</p><p style="display:inline;" id="head1"> #DEFAULT</p></br>
+				<p style="display:inline;">Filament (bobine 2) :</p><p style="display:inline;" id="head2"> #DEFAULT</p></br>
+				<p style="display:inline;">Filament (bobine 3) :</p><p style="display:inline;" id="head3"> #DEFAULT</p></br>
 			</div>
 		</div>
 		<div class="col-md-6">
@@ -85,7 +88,7 @@ function closeNav() {
 
 	
 
-	
+
 
 </div> 
   <button class="button2" onclick="window.location.href='search_file.html'">Retour</button>
@@ -94,6 +97,5 @@ function closeNav() {
 </body>
 
 
-
-
+<script>getFileState("<?php echo $_GET['namefile']; ?>");</script>
 </html> 

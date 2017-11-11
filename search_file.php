@@ -17,6 +17,8 @@ function closeNav() {
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
 <link rel="stylesheet" href="./css/style.css" />
+<script src="./js/function.js" type="text/javascript"></script>
+
 <title>3D NOV</title>
 </head>
 
@@ -54,20 +56,48 @@ function closeNav() {
 	<h2> Veuillez chercher votre fichier </h2>
 <div id="main" style="text-align:center;">
 
-	
-	<form enctype="multipart/form-data" action="./traitement/page_imp.php" method="post">
-		<input type="hidden" name="MAX_FILE_SIZE" value="30000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" />
-		<input name="temp_file" type="file" accept=".gcode,.STL,.txt" >
 
-	
 
-</div> 
-  <button class="button2" onclick="window.location.href='start_imp.html'">Retour</button>
-  <input type="submit" value="Valider" class="button_valid_file">
-	</form>
+	<input id="file" type="file" accept=".gcode,.STL,.txt" style="color:white;">
+	<progress id="progress"></progress>
+	<button class="button_valid_file" onclick="uploadFile()">Valider</button>
+</div>
 </body>
+  <button class="button2" style="background-color:#6E6E6E" onclick="window.location.href='index.html'">Retour</button>
+  <button class="button_valid_file" onclick="redirection()">Suivant</button>
 
 
 
+
+
+
+
+<script>
+
+
+
+
+/*    var fileInput = document.querySelector('#file');
+
+
+    fileInput.addEventListener('change', function() {
+
+
+        var reader = new FileReader();
+
+
+        reader.addEventListener('load', function() {
+
+            alert('Contenu du fichier "' + fileInput.files[0].name + '" :\n\n' + reader.result);
+
+        });
+
+
+        reader.readAsText(fileInput.files[0]);
+
+
+    });*/
+
+</script>
 
 </html> 

@@ -22,6 +22,7 @@ function closeNav() {
 
 <link href="./css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css" />
+<script src="./js/function.js" type="text/javascript"></script>
 <title>3D NOV</title>
 </head>
 
@@ -63,9 +64,9 @@ function closeNav() {
 			<div class="col-md-6" id="leftside">
 				<div class="row" id="leftTop" style="font-size:2em;">
 				<p> Statut: #DEFAULT </p></br>
-				<p> Couche Actuelle : 0 sur 0</p></br>
-				<p>Temps écoulé : #DEFAULT</p></br>
-				<p> Temps restant estimé : #DEFAULT</p>
+				<p style="display:inline;"> Pourcent de réalisation : </p><p id="pourcent" style="display:inline;padding-left:1%;" > 0 sur 0</p></br>
+				<p style="display:inline;">Temps écoulé : </p><p id="timeSpend"style="display:inline;padding-left:1%;"> #DEFAULT</p></br>
+				<p style="display:inline;"> Temps restant estimé : </p><p id="timeLeft" style="display:inline;padding-left:1%;"> #DEFAULT</p>
 				</div>
 				<div class="row">
 					<div class="col-md-6" id="leftside">
@@ -155,6 +156,11 @@ var rangeSlider = function(){
 };
 
 rangeSlider();
+</script>
+
+<script>
+
+getState();
 </script>
 
 </html> 

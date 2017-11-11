@@ -15,6 +15,8 @@ function closeNav() {
 
 
 
+
+
 <html lang="fr">
 
 <head>
@@ -28,7 +30,8 @@ function closeNav() {
 
 
 <script src="http:/localhost:5000/static/js/lib/less.min.js" type="text/javascript"></script>
- 
+<script src="./js/function.js" type="text/javascript"></script>
+
 
 
 <link href="./css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -65,6 +68,14 @@ function closeNav() {
 </header>
 
 
+<script>
+window.setInterval(function(){
+  getTemp(1);
+  getTemp(2);
+  getTemp(3);
+}, 5000);
+</script>
+
 
 
 
@@ -79,109 +90,46 @@ function closeNav() {
 					<div class="col-md-6" style="text-align:center">
 						<h3>Axes X/Y</h3></br>
 						<div>
-							<img src="./img/up.svg" width="20%" height="20%"/>
+							<input type="image"  src="./img/up.svg" value="clickme" onclick="move(0,dt,0)" width="20%" height="20%">
 						</div>
 						<div>
-								<img src="./img/left.svg" width="20%" height="20%" class="img_align"/>
-								<img src="./img/home.png" width="20%" height="20%" class="img_align"/>
-								<img src="./img/right.svg" width="20%" height="20%"class="img_align"/>
+								
+								<input type="image" class="img_align" src="./img/left.svg" value="clickme" onclick="move(-dt,0,0)" width="20%" height="20%">
+								<input type="image" class="img_align" src="./img/home.png" value="clickme" onclick="homeXY()" width="20%" height="20%">
+								<input type="image" class="img_align" src="./img/right.svg" value="clickme" onclick="move(dt,0,0)" width="20%" height="20%">
+								
+								
 						</div>
 						<div>
-							<img src="./img/down.svg" width="20%" height="20%"/>
+							<input type="image"  src="./img/down.svg" value="clickme" onclick="move(0,-dt,0)" width="20%" height="20%">
 						</div>
 					</div>
 					
 					<div class="col-md-6" style="text-align:center">
 						<h3>Axe Z</h3></br>
 						<div>
-							<img src="./img/up.svg" width="20%" height="20%"/>
 							
+							<input type="image"  src="./img/up.svg" value="clickme" onclick="move(0,0,dt)" width="20%" height="20%">
 						</div>
 						<div>
 						
 							<!--<img src="./img/home.png" width="20%" height="20%" />-->
-							<input type="image"  src="./img/home.png" value="clickme" onclick="doFunction()" width="20%" height="20%">
-<script>
-function doFunction(){
-fetch("http://localhost:5000/api/job",{
-  method: "post",
-  headers: {
-    'Content-Type': 'application/json',
-	'X-Api-Key': 'D337D723E2684C0989708BD216F0C6F0',
-	'Access-Control-Allow-Origin':'*',
-	'Access-Control-Allow-Headers':'x-requested-with',
-	'Access-Control-Allow-Methods':' PUT, DELETE, OPTIONS,POST,GET'
-  },
+							<input type="image"  src="./img/home.png" value="clickme" onclick="homeZ()" width="20%" height="20%">
 
-  //make sure to serialize your JSON body
-  body: JSON.stringify({
-    'command':'start'
-  })
-})
-.then( (response) => { 
-   //do something awesome that makes the world a better place
-});
-}
-</script>
 
-<script>
-function getXDomainRequest() {
 
-        var xdr = null;
-
-        
-
-        if (window.XDomainRequest) {
-
-                xdr = new XDomainRequest(); 
-
-        } else if (window.XMLHttpRequest) {
-
-                xdr = new XMLHttpRequest(); 
-
-        } else {
-
-                alert("Votre navigateur ne gère pas l'AJAX cross-domain !");
-
-        }
-
-        
-
-        return xdr;        
-
-}
-
-function sendData() {
-
-        var xdr = getXDomainRequest();
-
-        xdr.onload = function() {
-
-                alert(xdr.responseText);
-
-        }
-
-        
-
-        xdr.open("GET", "http://localhost:5000/");
-
-        xdr.send();
-
-}
-
-</script>
 						</div>
 						
 						<div>
-							<img src="./img/down.svg" width="20%" height="20%"/>
+							<input type="image"  src="./img/down.svg" value="clickme" onclick="move(0,0,-dt)" width="20%" height="20%">
 						</div>
 					</div>
 					<div class="div_match">
-						<button class="button_number" onclick="window.location.href='start_imp.html'">0.1</button>
-						<button class="button_number" onclick="window.location.href='start_imp.html'">1</button>
-						<button class="button_number" onclick="window.location.href='start_imp.html'">10</button>
-						<button class="button_number" onclick="window.location.href='start_imp.html'">30</button>
-						<button class="button_number" onclick="window.location.href='start_imp.html'">100</button>
+						<button class="button_number" onclick="changeDt(0.1)">0.1</button>
+						<button class="button_number" onclick="changeDt(1)">1</button>
+						<button class="button_number" onclick="changeDt(10)">10</button>
+						<button class="button_number" onclick="changeDt(30)">30</button>
+						<button class="button_number" onclick="changeDt(100)">100</button>
 					</div>
 				</div>
 				
@@ -192,7 +140,7 @@ function sendData() {
 						</div>
 						<div class="img_hori">
 							<div class="box">
-								<p>#default</p>
+								<p id="temp1"> #DEFAULT </p>
 								<p>Tête 1</p>
 							</div>
 						</div>
@@ -207,7 +155,7 @@ function sendData() {
 						</div>
 						<div class="img_hori">
 							<div class="box">
-								<p>#default</p>
+								<p id="temp2"> #DEFAULT </p>
 								<p>Tête 2</p>
 							</div>
 						</div>
@@ -221,7 +169,7 @@ function sendData() {
 						</div>
 						<div class="img_hori">
 							<div class="box">
-								<p>#default</p>
+								<p id="temp3"> #DEFAULT </p>
 								<p>Tête 3</p>
 							</div>
 						</div>
@@ -232,16 +180,16 @@ function sendData() {
 					<div class="col-md-3">
 						<div  style="text-align:center">
 						<p></p>
-							<font color="white" style="cursor: pointer;">Retracter</font>
+							<font color="white" style="cursor: pointer;" onclick="extrude(-5);">Retracter</font>
 						</div>
 						<div class="img_hori">
 							<div class="box">
-								<p><font color="red">test</font></p>
+								<p><font color="red">5</font></p>
 								<p><font color="red">mm</font></p>
 							</div>
 						</div>
 						<div style="text-align:center">
-							<p style="cursor: pointer;">Extruder</p>
+							<p style="cursor: pointer;" onclick="extrude(5);">Extruder</p>
 						</div>
 					</div>
 				</div>
@@ -255,16 +203,16 @@ function sendData() {
 					<div class="range-slider">
 						<p> Tête n°1 </p>
 		               <input type="range" value="0" min="0" max="350" class="range-slider__range" orient="vertical">
-						<div class="indic"><span>0</span></div>
-						<div><button class="button_simple" onclick="window.location.href='start_imp.html'">Ok</button></div>
+						<div id="temp1" class="indic"><span>0</span></div>
+						<div><button class="button_simple" onclick="changeTempValue(+document.getElementById('temp1').innerHTML,1)">Ok</button></div>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="range-slider">
 						<p> Tête n°2 </p>
 						<input type="range"  value="0" min="0" max="350" class="range-slider__range" orient="vertical">
-						<div class="indic"><span>0</span></div>
-						<div><button class="button_simple" onclick="window.location.href='start_imp.html'">Ok</button></div>
+						<div id="temp2" class="indic"><span >0</span></div>
+						<div><button class="button_simple" onclick="changeTempValue(+document.getElementById('temp2').innerHTML,2)">Ok</button></div>
 					</div>
 				</div>
 
@@ -272,8 +220,8 @@ function sendData() {
 					<div class="range-slider">
 						<p> Tête n°3 </p>
 						<input type="range" value="0" min="0" max="350" class="range-slider__range" orient="vertical">
-						<div class="indic"><span>0</span></div>
-						<div><button class="button_simple" onclick="window.location.href='start_imp.html'">Ok</button></div>
+						<div id="temp3" class="indic"><span>0</span></div>
+						<div><button class="button_simple" onclick="changeTempValue(+document.getElementById('temp3').innerHTML,3)">Ok</button></div>
 					</div>
 				</div>
 			</div>
@@ -289,7 +237,7 @@ function sendData() {
 </div>
 </section>
 
-  <button class="button2">Utilitaires</button>
+  <button class="button2" onclick="test()">Utilitaires</button>
   <button class="button3">Redémarrer</button>
   
   
@@ -319,5 +267,12 @@ var rangeSlider = function(){
 
 rangeSlider();
 </script>
+
+<script>
+refresh_temp();
+</script>
+
+
+
 
 </html> 

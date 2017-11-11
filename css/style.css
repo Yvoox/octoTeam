@@ -356,3 +356,7 @@ input[type=range]::-moz-range-track {
  
 }
 
+.mainLoader{
+	background-color:black;
+	background-image:none;
+}
