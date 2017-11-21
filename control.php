@@ -1,71 +1,4 @@
-<!DOCTYPE html>
-<?php header('Access-Control-Allow-Origin: *'); ?>
-<script>
-/* Set the width of the side navigation to 250px */
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
-
-/* Set the width of the side navigation to 0 */
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-} 
-</script>
-
-
-
-
-
-
-<html lang="fr">
-
-<head>
-<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
-<script src="http://localhost:5000/static/webassets/packed_client.js"</script>
-
-
-<script src="http:/localhost:5000/static/js/lib/less.min.js" type="text/javascript"></script>
-<script src="./js/function.js" type="text/javascript"></script>
-
-
-
-<link href="./css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="./css/style.css" />
-
-<title>3D NOV</title>
-</head>
-
-
-
-
-
-
-
-<body>
-
-<header>
-
-<div class="navbar_custom">
-	<div id="mySidenav" class="sidenav">
-	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	  <a href="index.html">Accueil</a>
-	  <a href="#">Services</a>
-	  <a href="#">Clients</a>
-	  <a href="#">Contact</a>
-	</div>
-	<span onclick="openNav()"><img src="./img/navbar.png" width="5%" height="5%"/></span>
-	<span><img src="./img/logo.png" width="15%" height="15%"/></span>
-	<span onclick="openNav()"> DEFAULT ID AND NAME </span>
-
-</div>	
-
-
-</header>
+<?php include('header.php');?>
 
 
 <script>
@@ -136,7 +69,7 @@ window.setInterval(function(){
 				<div class="row">
 					<div class="col-md-3">
 						<div style="text-align:center">
-							<img src="./img/up.svg" width="30%" height="30%"/>
+							<input type="image"  src="./img/up.svg" value="clickme" onclick="changeTempValue(lastTempConsign1+1,1)" width="30%" height="30%">
 						</div>
 						<div class="img_hori">
 							<div class="box">
@@ -145,13 +78,13 @@ window.setInterval(function(){
 							</div>
 						</div>
 						<div style="text-align:center">
-							<img src="./img/down.svg" width="30%" height="30%"/>
+							<input type="image"  src="./img/down.svg" value="clickme" onclick="changeTempValue(lastTempConsign1-1,1)" width="30%" height="30%">
 						</div>
 						
 					</div>
 					<div class="col-md-3">
 						<div style="text-align:center">
-							<img src="./img/up.svg" width="30%" height="30%"/>
+							<input type="image"  src="./img/up.svg" value="clickme" onclick="changeTempValue(lastTempConsign2+1,2)" width="30%" height="30%">
 						</div>
 						<div class="img_hori">
 							<div class="box">
@@ -160,12 +93,12 @@ window.setInterval(function(){
 							</div>
 						</div>
 						<div style="text-align:center">
-							<img src="./img/down.svg" width="30%" height="30%"/>
+							<input type="image"  src="./img/down.svg" value="clickme" onclick="changeTempValue(lastTempConsign2-1,2)" width="30%" height="30%">
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div style="text-align:center">
-							<img src="./img/up.svg" width="30%" height="30%"/>
+							<input type="image"  src="./img/up.svg" value="clickme" onclick="changeTempValue(lastTempConsign3+1,3)" width="30%" height="30%">
 						</div>
 						<div class="img_hori">
 							<div class="box">
@@ -174,7 +107,7 @@ window.setInterval(function(){
 							</div>
 						</div>
 						<div style="text-align:center">
-							<img src="./img/down.svg" width="30%" height="30%"/>
+							<input type="image"  src="./img/down.svg" value="clickme" onclick="changeTempValue(lastTempConsign3-1,3)" width="30%" height="30%">
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -203,16 +136,16 @@ window.setInterval(function(){
 					<div class="range-slider">
 						<p> Tête n°1 </p>
 		               <input type="range" value="0" min="0" max="350" class="range-slider__range" orient="vertical">
-						<div id="temp1" class="indic"><span>0</span></div>
-						<div><button class="button_simple" onclick="changeTempValue(+document.getElementById('temp1').innerHTML,1)">Ok</button></div>
+						<div id="changetemp1" class="indic"><span>0</span></div>
+						<div><button class="button_simple" onclick="changeTempValue(+document.getElementById('changetemp1').innerHTML,1)">Ok</button></div>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="range-slider">
 						<p> Tête n°2 </p>
 						<input type="range"  value="0" min="0" max="350" class="range-slider__range" orient="vertical">
-						<div id="temp2" class="indic"><span >0</span></div>
-						<div><button class="button_simple" onclick="changeTempValue(+document.getElementById('temp2').innerHTML,2)">Ok</button></div>
+						<div id="changetemp2" class="indic"><span >0</span></div>
+						<div><button class="button_simple" onclick="changeTempValue(+document.getElementById('changetemp2').innerHTML,2)">Ok</button></div>
 					</div>
 				</div>
 
@@ -220,8 +153,8 @@ window.setInterval(function(){
 					<div class="range-slider">
 						<p> Tête n°3 </p>
 						<input type="range" value="0" min="0" max="350" class="range-slider__range" orient="vertical">
-						<div id="temp3" class="indic"><span>0</span></div>
-						<div><button class="button_simple" onclick="changeTempValue(+document.getElementById('temp3').innerHTML,3)">Ok</button></div>
+						<div id="changetemp3" class="indic"><span>0</span></div>
+						<div><button class="button_simple" onclick="changeTempValue(+document.getElementById('changetemp3').innerHTML,3)">Ok</button></div>
 					</div>
 				</div>
 			</div>
@@ -237,7 +170,7 @@ window.setInterval(function(){
 </div>
 </section>
 
-  <button class="button2" onclick="test()">Utilitaires</button>
+  <button class="button2" onclick="">Utilitaires</button>
   <button class="button3">Redémarrer</button>
   
   

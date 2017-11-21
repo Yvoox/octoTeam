@@ -1,7 +1,27 @@
-var temp1,temp2,temp3,dt=0,root,impname,redirect,filename;
+var temp1,temp2,temp3,dt=0,root,impname,redirect,filename,lastTempConsign1,lastTempConsign2,lastTempConsign3;
 var HOST = "http://localhost:5000";
 
 
+function refreshConnectionIcone(){
+var a = getConnectionState();
+setTimeout(function(){  
+	if(a==1){document.getElementById("connection_state").src='./img/connection_g.svg';}
+	else{document.getElementById("connection_state").src='./img/connection_r.svg';}
+}, 1000);
+setTimeout('refreshConnectionIcone()',1000);
+}
+
+function refreshPrinterIcone(){
+var a = getImpState();
+setTimeout(function(){  
+	if(a==1){document.getElementById("imp_state").src='./img/imp_state_on.png';}
+	if(a==2){document.getElementById("imp_state").src='./img/imp_state_off.png';}
+	if(a==3){document.getElementById("imp_state").src='./img/imp_state_error.png';}
+}, 1000);
+setTimeout('refreshPrinterIcone()',1000);
+}
+
+/*OBSOLETE
 function startImp(){
 fetch(HOST+"/api/job",{
   method: "post",
@@ -21,7 +41,7 @@ fetch(HOST+"/api/job",{
 .then( (response) => { 
    //do something awesome that makes the world a better place
 });
-}
+}*/
 
 function homeZ(){
 fetch(HOST+"/api/printer/printhead",{
@@ -139,6 +159,9 @@ fetch(HOST+"/api/printer/tool",{
 .then( (response) => { 
    //do something awesome that makes the world a better place
 });
+lastTempConsign1=temp1;
+lastTempConsign2=temp2;
+lastTempConsign3=temp3;
 }
 
 function changeDt(value){
@@ -196,6 +219,7 @@ var fileInput = document.querySelector('#file'),
 
 	redirect=fileInput.files[0].type;
 	filename=fileInput.files[0].name;
+	setCookie("filename", filename, 365);
 
 }
 
@@ -229,6 +253,16 @@ xmlhttp.onreadystatechange = function () {
 xmlhttp.send(null);
 }
 
+function printCurrent(){
+	var nameOfFile=getCookie("filename");
+	if(nameOfFile!=null && nameOfFile!=""){
+		window.location.href='print.php?filename='+nameOfFile;
+	}
+	else{
+	alert("Pas de print en cours !");
+	}
+}
+
 function getState(){
 var courses = {};
 var url = "http://localhost:5000/api/job?apikey=D337D723E2684C0989708BD216F0C6F0";
@@ -240,6 +274,7 @@ xmlhttp.onreadystatechange = function () {
 	document.getElementById("pourcent").innerHTML = (courses.progress.completion*100).toFixed(2)+" %";
 	document.getElementById("timeSpend").innerHTML = (courses.progress.printTime/3600).toFixed(2)+" Heure(s)";
 	document.getElementById("timeLeft").innerHTML = (courses.progress.printTimeLeft/3600).toFixed(2)+" Heure(s)";
+	document.getElementById("statut").innerHTML = courses.state;
   }
 };
 xmlhttp.send(null);
@@ -266,7 +301,53 @@ fetch(HOST+"/api/files/"+directory+"/"+file,{
 .then( (response) => { 
    //do something awesome that makes the world a better place
 });
-window.location.href='print.html?filename='+file;
+setTimeout("window.location.href='print.php?filename="+file+"'",5000);
+}
+
+function toggleImp(directory,file){
+fetch(HOST+"/api/job",{
+  method: "post",
+  headers: {
+    'Content-Type': 'application/json',
+	'X-Api-Key': 'D337D723E2684C0989708BD216F0C6F0',
+	'Access-Control-Allow-Origin':'*',
+	'Access-Control-Allow-Headers':'x-requested-with',
+	'Access-Control-Allow-Methods':' PUT, DELETE, OPTIONS,POST,GET'
+  },
+
+  //make sure to serialize your JSON body
+  body: JSON.stringify({
+    'command':"pause",
+	 "action":"toggle"
+  })
+})
+.then( (response) => { 
+   //do something awesome that makes the world a better place
+});
+}
+
+
+
+function stopImp(directory,file){
+fetch(HOST+"/api/job",{
+  method: "post",
+  headers: {
+    'Content-Type': 'application/json',
+	'X-Api-Key': 'D337D723E2684C0989708BD216F0C6F0',
+	'Access-Control-Allow-Origin':'*',
+	'Access-Control-Allow-Headers':'x-requested-with',
+	'Access-Control-Allow-Methods':' PUT, DELETE, OPTIONS,POST,GET'
+  },
+
+  //make sure to serialize your JSON body
+  body: JSON.stringify({
+    'command':"cancel"
+  })
+})
+.then( (response) => { 
+   //do something awesome that makes the world a better place
+});
+setCookie("filename", "", 365);
 }
 
 
@@ -332,7 +413,7 @@ xmlhttp.open("GET", url, true);
 xmlhttp.onreadystatechange = function () {
   if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
     courses = JSON.parse(xmlhttp.responseText);
-	if(courses.current.state=="Operational"){
+	if(courses.current.state=="Operational" || courses.current.state=="Printing" || courses.current.state=="Paused"){
 	test=1;}
 	else{
 	test=2;}
@@ -342,10 +423,35 @@ xmlhttp.onreadystatechange = function () {
 xmlhttp.send(null);
 return test;
 }
+var result;
+function getImpState(){
+
+var courses = {};
+var url = HOST+"/api/printer?history=true&limit=2&apikey=D337D723E2684C0989708BD216F0C6F0"
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.open("GET", url, true);
+xmlhttp.onreadystatechange = function () {
+  if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+    courses = JSON.parse(xmlhttp.responseText);
+	
+	if(courses.state.text=='Printing' || courses.state.text=='Paused'){
+		result=1;  //green
+	}
+	else if(courses.state.text=='Operational'){
+		result=2; //grey
+	}
+	else{
+		result=3; //red
+	}
+  }
+};
+xmlhttp.send(null);
+return result;
+}
 
 function printerConnection(){
 	connection_portAuto();
-	document.location.href="index.html"
+	document.location.href="index.php"
 }
 
 function changeName(name){
@@ -398,4 +504,28 @@ fetch(HOST+"/api/settings",{
 .then( (response) => { 
    //do something awesome that makes the world a better place
 });
+}
+
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }

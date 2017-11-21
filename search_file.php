@@ -1,53 +1,4 @@
-<!DOCTYPE html>
-
-<script>
-/* Set the width of the side navigation to 250px */
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
-
-/* Set the width of the side navigation to 0 */
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-} 
-</script>
-
-<html lang="fr">
-
-<head>
-<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-<link rel="stylesheet" href="./css/style.css" />
-<script src="./js/function.js" type="text/javascript"></script>
-
-<title>3D NOV</title>
-</head>
-
-
-
-
-
-
-
-<body>
-
-<header>
-
-<div class="navbar_custom">
-	<div id="mySidenav" class="sidenav">
-	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	  <a href="index.html">Accueil</a>
-	  <a href="#">Services</a>
-	  <a href="#">Clients</a>
-	  <a href="#">Contact</a>
-	</div>
-	<span onclick="openNav()"><img src="./img/navbar.png" width="5%" height="5%"/></span>
-	<span><img src="./img/logo.png" width="15%" height="15%"/></span>
-	<span onclick="openNav()"> DEFAULT ID AND NAME </span>
-
-</div>	
-
-
-</header>
+<?php include('header.php');?>
 
 
 
@@ -63,7 +14,7 @@ function closeNav() {
 	<button class="button_valid_file" onclick="uploadFile()">Valider</button>
 </div>
 </body>
-  <button class="button2" style="background-color:#6E6E6E" onclick="window.location.href='index.html'">Retour</button>
+  <button class="button2" style="background-color:#6E6E6E" onclick="window.location.href='index.php'">Retour</button>
   <button class="button_valid_file" onclick="redirection()">Suivant</button>
 
 
